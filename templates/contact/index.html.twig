@@ -1,49 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contact index{% endblock %}
+{% block title %}Liste des contacts{% endblock %}
 
 {% block body %}
-    <h1>Contact index</h1>
-
+    <h1 class="display-4 mt-5 mb-5" style="text-align: center;">Liste des Contacts</h1>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Adresse</th>
-                <th>Ville</th>
-                <th>CodePostal</th>
-                <th>Telephone</th>
-                <th>Email</th>
-                <th>Fonction</th>
-                <th>actions</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Adresse</th>
+                <th scope="col">Ville</th>
+                <th scope="col">Code Postal</th>
+                <th scope="col">Telephone</th>
+                <th scope="col">Email</th>
+                <th scope="col">Fonction</th>
+                <th scope="col">Entreprise</th>
+                <th scope="col">Promotion</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for contact in contacts %}
             <tr>
-                <td>{{ contact.id }}</td>
                 <td>{{ contact.nom }}</td>
                 <td>{{ contact.prenom }}</td>
                 <td>{{ contact.adresse }}</td>
-                <td>{{ contact.ville }}</td>
-                <td>{{ contact.codePostal }}</td>
-                <td>{{ contact.telephone }}</td>
-                <td>{{ contact.email }}</td>
-                <td>{{ contact.fonction }}</td>
+                <td>{{ contact.ville }} </td>
+                <td>{{ contact.codePostal }} </td>
+                <td>{{ contact.telephone }} </td>
+                <td>{{ contact.email }} </td>
+                <td>{{ contact.fonction }} </td>
+                <td>{{ contact.entreprise }} </td>
+                <td>{{ contact.promotion }} </td>
                 <td>
-                    <a href="{{ path('contact_show', {'id': contact.id}) }}">show</a>
-                    <a href="{{ path('contact_edit', {'id': contact.id}) }}">edit</a>
+                    <a href="{{ path('contact_edit', {'id': contact.id}) }}">Editer</a>
+                    <a href="{{ path('contact_delete', {'id': contact.id}) }}">Supprimer</a>
                 </td>
+    
             </tr>
         {% else %}
             <tr>
-                <td colspan="10">no records found</td>
+                <td colspan="2">Pas de contacts trouvés</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('contact_new') }}">Create new</a>
+    <div>
+        <a href="{{ path('contact_new') }}"> + Créer un nouveau contact</a> 
+    </div>
 {% endblock %}

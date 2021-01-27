@@ -1,47 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Entreprise index{% endblock %}
+{% block title %}Liste des entreprises{% endblock %}
 
 {% block body %}
-    <h1>Entreprise index</h1>
-
+    <h1 class="display-4 mt-5 mb-5" style="text-align: center;">Liste des Entreprises</h1>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Adresse</th>
-                <th>Ville</th>
-                <th>CodePostal</th>
-                <th>Telephone</th>
-                <th>Email</th>
-                <th>TypeEntreprise</th>
-                <th>actions</th>
+                <th scope="col">Entreprise</th>
+                <th scope="col">Adresse</th>
+                <th scope="col">Ville</th>
+                <th scope="col">Code Postal</th>
+                <th scope="col">Telephone</th>
+                <th scope="col">Email</th>
+                <th scope="col">Type</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entreprise in entreprises %}
             <tr>
-                <td>{{ entreprise.id }}</td>
                 <td>{{ entreprise.nom }}</td>
                 <td>{{ entreprise.adresse }}</td>
-                <td>{{ entreprise.ville }}</td>
-                <td>{{ entreprise.codePostal }}</td>
-                <td>{{ entreprise.telephone }}</td>
-                <td>{{ entreprise.email }}</td>
-                <td>{{ entreprise.typeEntreprise }}</td>
+                <td>{{ entreprise.ville }} </td>
+                <td>{{ entreprise.codePostal }} </td>
+                <td>{{ entreprise.telephone }} </td>
+                <td>{{ entreprise.email }} </td>
+                <td>{{ entreprise.typeEntreprise }} </td>
                 <td>
-                    <a href="{{ path('entreprise_show', {'id': entreprise.id}) }}">show</a>
-                    <a href="{{ path('entreprise_edit', {'id': entreprise.id}) }}">edit</a>
+                    <a href="{{ path('entreprise_edit', {'id': entreprise.id}) }}">Editer</a>
+                    <a href="{{ path('entreprise_delete', {'id': entreprise.id}) }}">Supprimer</a>
                 </td>
+    
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="2">Pas d'entreprises trouvées</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('entreprise_new') }}">Create new</a>
+    <div>
+        <a href="{{ path('entreprise_new') }}"> + Créer une nouvelle entreprise</a> 
+    </div>
 {% endblock %}
