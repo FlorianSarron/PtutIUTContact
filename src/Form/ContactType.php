@@ -20,8 +20,6 @@ class ContactType extends AbstractType
             ->add('telephone')
             ->add('email')
             ->add('fonction')
-            ->add('entreprise')
-            ->add('promotion')
         ;
     }
 
