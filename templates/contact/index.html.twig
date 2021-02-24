@@ -34,8 +34,14 @@
                 <td>{{ contact.entreprise }} </td>
                 <td>{{ contact.promotion }} </td>
                 <td>
-                    <a href="{{ path('contact_edit', {'id': contact.id}) }}">Editer</a>
-                    <a href="{{ path('contact_delete', {'id': contact.id}) }}">Supprimer</a>
+                    <td>
+                        <a class="btn btn-btn btn-success btn-md ml-2"  href="{{ path('contact_edit', {'id': contact.id}) }}">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a class="btn btn-danger btn-md ml-2"  href="{{ path('contact_delete', {'id': contact.id}) }}">
+                            <i class="far fa-trash-alt"></i>
+                        </a>
+                    </td>
                 </td>
     
             </tr>

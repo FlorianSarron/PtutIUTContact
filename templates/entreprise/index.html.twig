@@ -14,7 +14,8 @@
                 <th scope="col">Telephone</th>
                 <th scope="col">Email</th>
                 <th scope="col">Type</th>
-                <th scope="col">Actions</th>
+                <th scope="col">Editer</th>
+                <th scope="col">Supprimer</th>
             </tr>
         </thead>
         <tbody>
@@ -28,8 +29,12 @@
                 <td>{{ entreprise.email }} </td>
                 <td>{{ entreprise.typeEntreprise }} </td>
                 <td>
-                    <a href="{{ path('entreprise_edit', {'id': entreprise.id}) }}">Editer</a>
-                    <a href="{{ path('entreprise_delete', {'id': entreprise.id}) }}">Supprimer</a>
+                    <a class="btn btn-btn btn-success btn-md ml-2"  href="{{ path('entreprise_edit', {'id': entreprise.id}) }}">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a class="btn btn-danger btn-md ml-2"  href="{{ path('entreprise_delete', {'id': entreprise.id}) }}">
+                        <i class="far fa-trash-alt"></i>
+                    </a>
                 </td>
     
             </tr>
