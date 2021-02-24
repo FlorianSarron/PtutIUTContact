@@ -1,4 +1,15 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <label>Entreprise</label>
+    <br />
+    <input>{{contact.entreprise}}</input>
+    <br />
+    <a class="bouton-bleu" href="{{ path('entreprise_new') }}" >Créer une nouvelle entreprise</a>
+    <br />
+    <label>promotion</label>
+    <br />
+    <input>{{contact.promotion}}</input>
+    <br />
+    <a class="bouton-bleu" href="{{ path('promotion_new') }}">Créer une nouvelle promotion</a>
+    <br />
 {{ form_end(form) }}
