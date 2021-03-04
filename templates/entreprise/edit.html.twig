@@ -3,7 +3,12 @@
 {% block title %}Edit Entreprise{% endblock %}
 
 {% block body %}
-    <h1>Edition de l'entreprise</h1>
 
-    {{ include('entreprise/_form.html.twig', {'button_label': 'Enregistrer les modifications'}) }}
+    <div class="card border-primary col-md-6 offset-md-3">
+        <div class="card-header" style="text-align: center; font-size: large;">Modification de l'entreprise <i> {{ entreprise.nom }} </i> </div>
+            <div class="card-body">
+                {{ include('entreprise/_form.html.twig', {'button_label': 'Enregistrer les modifications'}) }}
+            </div>
+    </div>
+    
 {% endblock %}

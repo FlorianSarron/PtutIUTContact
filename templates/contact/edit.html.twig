@@ -3,8 +3,10 @@
 {% block title %}Edit Contact{% endblock %}
 
 {% block body %}
-    <h1>Edition de {{ contact.name }}</h1>
-
-    {{ include('contact/_form.html.twig', {'button_label': 'Enregister les modifications'}) }}
-
+    <div class="card border-primary col-md-6 offset-md-3">
+        <div class="card-header" style="text-align: center; font-size: large;">Modifier le contact <i> {{contact.prenom}} {{contact.nom}}</i></div>
+            <div class="card-body">
+                {{ include('contact/_form.html.twig', {'button_label': 'Enregister les modifications'}) }}
+            </div>
+    </div>
 {% endblock %}
