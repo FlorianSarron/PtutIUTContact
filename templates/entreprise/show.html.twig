@@ -6,7 +6,7 @@
     <h1>Entreprise</h1>
 
     <table class="table">
-        <caption>liste des entreprises rentré dans la base de donnée.</caption>
+        <caption>Affichage d'une entreprise</caption>
         <tbody>
             <tr>
                 <th>Id</th>
@@ -48,4 +48,11 @@
     <a href="{{ path('entreprise_edit', {'id': entreprise.id}) }}">edit</a>
 
     {{ include('entreprise/_delete_form.html.twig') }}
+
+    <style>
+        caption {
+            color: #000000;
+        }
+    </style>
 {% endblock %}
+

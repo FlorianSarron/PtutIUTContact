@@ -6,7 +6,7 @@
     <h1>Promotion</h1>
 
     <table class="table">
-        <caption>liste des promotions rentré dans la base de donnée.</caption>
+        <caption>Affichage d'une promotion</caption>
         <tbody>
             <tr>
                 <th>Id</th>
@@ -24,4 +24,11 @@
     <a href="{{ path('promotion_edit', {'id': promotion.id}) }}">edit</a>
 
     {{ include('promotion/_delete_form.html.twig') }}
+
+    <style>
+        caption {
+            color: #000000;
+        }
+    </style>
 {% endblock %}
+
