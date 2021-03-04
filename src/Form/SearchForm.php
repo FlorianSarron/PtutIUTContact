@@ -21,7 +21,9 @@ class SearchForm extends AbstractType
                 'label'=>'Rechercher',
                 'required'=>false,
                 'attr'=>[
-                    'placeholder'=>'Rechercher'
+                    'placeholder'=>'Rechercher',
+                    'title'=>'Entrez votre recherche',
+                    'autocomplete'=>'given-name'
                 ]
             ])
             ->add('entreprise',EntityType::class,[
