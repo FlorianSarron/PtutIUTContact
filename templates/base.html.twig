@@ -3,11 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        
         <link rel="stylesheet" href="https://bootswatch.com/4/united/bootstrap.min.css" >
         {% block stylesheets %}
-        
-        <link href="{{ asset('css/main.css')}}" rel="stylesheet" />
+          <link href="/public/css/main.css" rel="stylesheet" type="text/css"/>
         {% endblock %}
         
         {% block javascripts %}{% endblock %}
@@ -37,7 +35,7 @@
                   </div>
                 </li>
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="{{ path('contact-index') }}" role="button" aria-haspopup="true" aria-expanded="false">Contacts</a>
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="{{ path('contact_index') }}" role="button" aria-haspopup="true" aria-expanded="false">Contacts</a>
                   <div class="dropdown-menu">
                     <a class="dropdown-item" href="{{ path('contact_new') }}">Ajouter un contact</a>
                     <a class="dropdown-item" href="{{ path('contact_index') }}">Liste des contacts</a>
