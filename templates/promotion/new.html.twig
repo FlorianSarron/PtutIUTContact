@@ -7,4 +7,11 @@
 
     {{ include('promotion/_form.html.twig') }}
 
+    <style>
+        .required:after { 
+            content:"*";
+            color: red; 
+        }
+    </style>
+
 {% endblock %}

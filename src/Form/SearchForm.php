@@ -18,19 +18,19 @@ class SearchForm extends AbstractType
     {
         $builder
             ->add('stringSearch',TextType::class,[
-                'label'=>false,
+                'label'=>'Rechercher',
                 'required'=>false,
                 'attr'=>[
                     'placeholder'=>'Rechercher'
                 ]
             ])
             ->add('entreprise',EntityType::class,[
-                'label'=>false,
+                'label'=>'Entreprise',
                 'required'=>false,
                 'class'=>Entreprise::class,
             ])
             ->add('promotion',EntityType::class,[
-                'label'=>false,
+                'label'=>'Promotion',
                 'required'=>false,
                 'class'=>Promotion::class,
             ])

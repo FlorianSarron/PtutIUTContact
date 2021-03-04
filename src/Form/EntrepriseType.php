@@ -17,36 +17,43 @@ class EntrepriseType extends AbstractType
         $builder
             ->add('nom',TextType::class,
             [
+                'required'   => true,
                 'label' => 'Nom',
                 'attr' => ['placeholder' => 'Nom de l\'entreprise']
             ])
             ->add('adresse',TextType::class,
             [
+                'required'   => true,
                 'label' => 'Adresse',
                 'attr' => ['placeholder' => 'Adresse de l\'entreprise']
             ])
             ->add('ville',TextType::class,
             [
+                'required'   => true,
                 'label' => 'Ville',
                 'attr' => ['placeholder' => 'Location de l\'entreprise']
             ])
             ->add('codePostal',TextType::class,
             [
+                'required'   => true,
                 'label' => 'Code Postal',
                 'attr' => ['placeholder' => 'CP de l\'entreprise']
             ])
             ->add('telephone',TextType::class,
             [
+                'required'   => true,
                 'label' => 'Téléphone',
                 'attr' => ['placeholder' => 'Numéro de l\'entreprise']
             ])
             ->add('email',EmailType::class,
             [
+                'required'   => true,
                 'label' => 'E-mail',
                 'attr' => ['placeholder' => 'E-mail de l\'entreprise']
             ])
             ->add('typeEntreprise',ChoiceType::class,
             [
+                'required'   => true,
                 'label' => 'Type',
                 'choices'  => [
                     'Entreprise Stage' => 0,

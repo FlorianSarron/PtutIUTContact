@@ -14,6 +14,7 @@ class PromotionType extends AbstractType
     {
         $builder
             ->add('anneePromotion', DateType::class, [
+                'required'   => true,
             ])
         ;
     }

@@ -4,5 +4,13 @@
     <h1>Ajouter un contact</h1>
 
     {{ include('contact/_form.html.twig') }}
+    
+    
+    <style>
+        .required:after { 
+            content:"*";
+            color: red; 
+        }
+    </style>
 
 {% endblock %}

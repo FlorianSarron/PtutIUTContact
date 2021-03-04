@@ -16,33 +16,43 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class,[
+                'required'   => true,
                 'attr' => ['placeholder' => 'Nom du contact']
             ])
             ->add('prenom', TextType::class,[
+                'required'   => true,
                 'attr' => ['placeholder' => 'Prénom du contact']
             ])
             ->add('adresse', TextType::class,[
+                'required'   => true,
                 'attr' => ['placeholder' => 'Adresse du contact']
             ])
             ->add('ville', TextType::class,[
+                'required'   => true,
                 'attr' => ['placeholder' => 'Location du contact']
             ])
             ->add('codePostal', TextType::class,[
+                'required'   => true,
                 'attr' => ['placeholder' => 'CP du contact']
             ])
             ->add('telephone', TextType::class,[
+                'required'   => true,
                 'attr' => ['placeholder' => 'Numéro du contact']
             ])
             ->add('email', EmailType::class,[
+                'required'   => true,
                 'attr' => ['placeholder' => 'Email du contact']
             ])
             ->add('fonction', TextType::class,[
+                'required'   => true,
                 'attr' => ['placeholder' => 'Fonction du contact']
             ])
             ->add('entreprise', TextType::class,[
+                'required'   => false,
                 'attr' => ['placeholder' => 'Entreprise du contact']
             ])
             ->add('promotion', TextType::class,[
+                'required'   => false,
                 'attr' => ['placeholder' => 'Promotion du contact']
             ])
         ;
