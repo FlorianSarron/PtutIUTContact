@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Data\SearchData;
 use App\Form\ContactType;
+use App\Form\SearchForm;
 use App\Repository\ContactRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,10 +20,14 @@ class ContactController extends AbstractController
     /**
      * @Route("/", name="contact_index", methods={"GET"})
      */
-    public function index(ContactRepository $contactRepository): Response
+    public function index(ContactRepository $contactRepository,Request $request): Response
     {
+        $data=new SearchData();
+        $form=$this->createForm(SearchForm::class, $data);
+        $form->handleRequest($request);
         return $this->render('contact/index.html.twig', [
-            'contacts' => $contactRepository->findAll(),
+            'contacts' => $contactRepository->findSearch($data),
+            'form'=>$form->createView()
         ]);
     }
 
