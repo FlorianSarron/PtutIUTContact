@@ -1,8 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Ajouter un contact</h1>
+{% block title %}Ajouter un contact{% endblock %}
 
+{% block body %}
+    <div class="card border-primary col-md-6 offset-md-3">
+        <div class="card-header" style="text-align: center; font-size: large;">Créer un nouveau contact</div>
+            <div class="card-body">
+                {{ include('contact/_form.html.twig') }}
+            </div>
+    </div>
+
+    
     {{ include('contact/_form.html.twig') }}
     
     
