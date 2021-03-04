@@ -16,34 +16,44 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class,[
-                'attr' => ['placeholder' => 'Nom du contact']
+                'required'   => true,
+                'attr' => ['placeholder' => 'Nom du contact','title'=>'Entrez le nom','autocomplete'=>'given-name']
             ])
             ->add('prenom', TextType::class,[
-                'attr' => ['placeholder' => 'Prénom du contact']
+                'required'   => true,
+                'attr' => ['placeholder' => 'Prénom du contact','title'=>'Entrez le prénom','autocomplete'=>'given-name']
             ])
             ->add('adresse', TextType::class,[
-                'attr' => ['placeholder' => 'Adresse du contact']
+                'required'   => true,
+                'attr' => ['placeholder' => 'Adresse du contact','title'=>'Entrez l\'adresse','autocomplete'=>'given-name']
             ])
             ->add('ville', TextType::class,[
-                'attr' => ['placeholder' => 'Location du contact']
+                'required'   => true,
+                'attr' => ['placeholder' => 'Location du contact','title'=>'Entrez la ville','autocomplete'=>'given-name']
             ])
             ->add('codePostal', TextType::class,[
-                'attr' => ['placeholder' => 'CP du contact']
+                'required'   => true,
+                'attr' => ['placeholder' => 'CP du contact','title'=>'Entrez le code postal','autocomplete'=>'given-name']
             ])
             ->add('telephone', TextType::class,[
-                'attr' => ['placeholder' => 'Numéro du contact']
+                'required'   => true,
+                'attr' => ['placeholder' => 'Numéro du contact','title'=>'Entrez le numéro de téléphone','autocomplete'=>'given-name']
             ])
             ->add('email', EmailType::class,[
-                'attr' => ['placeholder' => 'Email du contact']
+                'required'   => true,
+                'attr' => ['placeholder' => 'Email du contact','title'=>'Entrez l\'email','autocomplete'=>'given-name']
             ])
             ->add('fonction', TextType::class,[
-                'attr' => ['placeholder' => 'Fonction du contact']
+                'required'   => true,
+                'attr' => ['placeholder' => 'Fonction du contact','title'=>'Entrez le fonction','autocomplete'=>'given-name']
             ])
             ->add('entreprise', TextType::class,[
-                'attr' => ['placeholder' => 'Entreprise du contact']
+                'required'   => false,
+                'attr' => ['placeholder' => 'Entreprise du contact','title'=>'Entrez l\'entreprise','autocomplete'=>'given-name']
             ])
             ->add('promotion', TextType::class,[
-                'attr' => ['placeholder' => 'Promotion du contact']
+                'required'   => false,
+                'attr' => ['placeholder' => 'Promotion du contact','title'=>'Entrez la promotion','autocomplete'=>'given-name']
             ])
         ;
     }

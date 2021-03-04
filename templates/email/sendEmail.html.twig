@@ -1,9 +1,18 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Envoyer un email{% endblock %}
 {% block body %}
+    <div id="contactForm">  
+        <form method="post">
+            <div>
+                <label for="msg">Message :</label>
+                <textarea id="msg" name="message"></textarea>
+            </div>
+            <button class="btn btn-primary mt-3">{{ button_label|default('Envoyer') }}</button>
+        </form>
 
+    </div>
     <div>
-        <p>email envoyé </p>
         <a href="email"> retour a la liste d'email</a> 
     </div>
 {% endblock %}

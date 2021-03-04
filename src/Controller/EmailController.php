@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Repository\ContactRepository;
+use App\Form\EmailType;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,6 +14,11 @@ use App\Notification\MailNotification;
 
 class EmailController extends AbstractController
 {
+    /*private $mailer;
+
+    public function __construct(MailerInterface $mailer){
+        $this->mailer=$mailer;
+    }*/
     /**
     * @Route("/email")
     */
@@ -24,22 +32,15 @@ class EmailController extends AbstractController
     /**
     * @Route("/sendEmail")
     */
-    public function sendEmail(\Swift_Mailer $mailer){
-            $text="Votre commande à bien été confirmée. \nVoici le contenu de votre commande: \n";
-            $text=$text. "Vous devrez retirer la commande dans votre magasin ";
-    
-            $message = (new \Swift_Message('Hello Email'))
-            ->setFrom('julien.rouilhac83@gmail.com')
-            ->setTo('julien.rouilhac@etu.univ-lyon1.fr')
-            ->setBody(
-                $this->renderView(
-                    '/email/test.html.twig'
-                    //'emails/test.html.twig',
-                ),
-                'text/html'
-            )
-        ;
-        $mailer->send($message);
+    public function sendEmail(Request $request){
+        if(!empty($request->request->get('message'))){
+            $email = (new Email())
+            ->from('floriansarrondev@gmail.com')
+            ->to('julien.rouilhac83@gmail.com')
+            ->subject('Service client')
+            ->text($request->request->get('message'));
+            //$this->mailer->send($email);
+        }
         return $this->render('email/sendEmail.html.twig');
     }
 }

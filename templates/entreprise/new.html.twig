@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Ajouter une entreprise{% endblock %}
 
 {% block body %}
     <div class="card border-primary col-md-6 offset-md-3">
@@ -9,5 +10,12 @@
         </div>
       </div>
     
+
+    <style>
+        .required:after { 
+            content:"*";
+            color: red; 
+        }
+    </style>
 
 {% endblock %}

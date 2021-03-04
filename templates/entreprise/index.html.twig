@@ -5,6 +5,7 @@
 {% block body %}
     <h1 class="display-4 mt-5 mb-5" style="text-align: center;">Liste des Entreprises</h1>
     <table class="table">
+        <caption>liste des entreprises rentré dans la base de donnée.</caption>
         <thead>
             <tr>
                 <th scope="col">Entreprise</th>
@@ -30,7 +31,8 @@
                 <td>{{ entreprise.typeEntreprise }} </td>
                 <td>
                     <a class="btn btn-btn btn-success btn-md ml-2"  href="{{ path('entreprise_edit', {'id': entreprise.id}) }}">
-                        <i class="fas fa-edit">Editer</i>
+                        <link rel="icon" type="image/png" href="../public/modifier.png" />
+                        <i class="fas fa-edit" >Editer</i>
                     </a>
                     <a class="btn btn-danger btn-md ml-2"  href="{{ path('entreprise_delete', {'id': entreprise.id}) }}">
                         <i class="far fa-trash-alt">Supprimer</i>

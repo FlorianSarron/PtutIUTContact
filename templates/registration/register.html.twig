@@ -18,4 +18,11 @@
 
         <button type="submit" class="btn">S'inscrire</button>
     {{ form_end(registrationForm) }}
+
+    <style>
+        .required:after { 
+            content:"*";
+            color: red; 
+        }
+    </style>
 {% endblock %}
