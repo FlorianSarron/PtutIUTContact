@@ -3,11 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        
         <link rel="stylesheet" href="https://bootswatch.com/4/united/bootstrap.min.css" >
         {% block stylesheets %}
-        
-        <link href="{{ asset('css/main.css')}}" rel="stylesheet" />
+          <link href="/public/css/main.css" rel="stylesheet" type="text/css"/>
         {% endblock %}
         
         {% block javascripts %}{% endblock %}
