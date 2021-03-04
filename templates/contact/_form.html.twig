@@ -1,16 +1,23 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <label>Entreprise</label>
-    <br />
-    <input>{{contact.entreprise}}</input>
-    <br />
-    <a class="bouton-bleu" href="{{ path('entreprise_new') }}" >Créer une nouvelle entreprise</a>
-    <br />
-    <label>promotion</label>
-    <br />
-    <input>{{contact.promotion}}</input>
-    <br />
-    <a class="bouton-bleu" href="{{ path('promotion_new') }}">Créer une nouvelle promotion</a>
-    <br />
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+    {{ form_row(form.nom) }}
+    {{ form_row(form.prenom) }}
+    {{ form_row(form.adresse) }}
+    {{ form_row(form.ville) }}
+    {{ form_row(form.codePostal) }}
+    {{ form_row(form.telephone) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.fonction) }}
+    <div class="form-group">
+        {{ form_row(form.entreprise) }}
+        <a href="{{ path('entreprise_new') }}"> + Créer une nouvelle entreprise</a>
+    </div>
+    <div class="form-group">
+        {{ form_row(form.promotion) }}
+        <a href="{{ path('promotion_new') }}"> + Créer une nouvelle promotion</a>
+    </div>
+    <button class="btn btn-primary mt-3">{{ button_label|default('Enregistrer') }}</button>
+    
 {{ form_end(form) }}

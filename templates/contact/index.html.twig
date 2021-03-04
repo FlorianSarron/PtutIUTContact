@@ -4,6 +4,9 @@
 
 {% block body %}
     <h1 class="display-4 mt-5 mb-5" style="text-align: center;">Liste des Contacts</h1>
+    <div>
+        {% include 'contact/_filter.html.twig' with {form: form } only %}
+    </div>
     <table class="table">
         <caption>liste des contacts rentré dans la base de donnée.</caption>
         <thead>
@@ -35,14 +38,12 @@
                 <td>{{ contact.entreprise }} </td>
                 <td>{{ contact.promotion }} </td>
                 <td>
-                    <td>
-                        <a class="btn btn-btn btn-success btn-md ml-2"  href="{{ path('contact_edit', {'id': contact.id}) }}">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <a class="btn btn-danger btn-md ml-2"  href="{{ path('contact_delete', {'id': contact.id}) }}">
-                            <i class="far fa-trash-alt"></i>
-                        </a>
-                    </td>
+                    <a class="btn btn-btn btn-success btn-md ml-2"  href="{{ path('contact_edit', {'id': contact.id}) }}">
+                        <i class="fas fa-edit">Editer</i>
+                    </a>
+                    <a class="btn btn-danger btn-md ml-2"  href="{{ path('contact_delete', {'id': contact.id}) }}">
+                         <i class="far fa-trash-alt">Supprimer</i>
+                    </a>
                 </td>
     
             </tr>
