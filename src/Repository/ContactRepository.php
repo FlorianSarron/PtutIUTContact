@@ -21,50 +21,32 @@ class ContactRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Product[]
+    //  * @return Contact[]
     //  */
     public function findSearch(SearchData $search)
     {
-    /*$query = $this
-        ->createQueryBuilder('p')
-        ->select('c', 'p')
-        ->join('p.categories', 'c');
+        $allContacts=$this->findAll();
+        $filteredContacts=[];
 
-    if (!empty($search->q)) {
-        $query = $query
-            ->andWhere('p.name LIKE :q')
-            ->setParameter('q', "%{$search->q}%");
-    }
+        foreach($allContacts as $contact)
+        {
+            if (str_contains($contact->nom,$search->stringSearch) || str_contains($contact->prenom,$search->stringSearch)) {
+                array_push($filteredContacts,$contact);
+            }
 
-    if (!empty($search->min)) {
-        $query = $query
-            ->andWhere('p.price >= :min')
-            ->setParameter('min', $search->min);
-    }
+            if ($contact->entreprise == $search->entreprise) {
+                array_push($filteredContacts,$contact);
+            }
 
-    if (!empty($search->max)) {
-        $query = $query
-            ->andWhere('p.price <= :max')
-            ->setParameter('max', $search->max);
-    }
+            if ($contact->promotion == $search->promotion) {
+                array_push($filteredContacts,$contact);
+            }
 
-    if (!empty($search->promo)) {
-        $query = $query
-            ->andWhere('p.promo = 1');
-    }
+        }
 
-    if (!empty($search->categories)) {
-        $query = $query
-            ->andWhere('c.id IN (:categories)')
-            ->setParameter('categories', $search->categories);
-    }
+        return $filteredContacts;
 
-    return $this->paginator->paginate(
-        $query,
-        $search->page,
-        9
-    );*/
-        return $this->findAll(); 
+        //return $this->findAll(); 
     }
     // /**
     //  * @return Contact[] Returns an array of Contact objects
