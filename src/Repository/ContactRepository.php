@@ -25,28 +25,27 @@ class ContactRepository extends ServiceEntityRepository
     //  */
     public function findSearch(SearchData $search)
     {
-        $allContacts=$this->findAll();
-        $filteredContacts=[];
+        $lstContacts=$this->findAll();
 
-        foreach($allContacts as $contact)
-        {
-            if (str_contains($contact->nom,$search->stringSearch) || str_contains($contact->prenom,$search->stringSearch)) {
-                array_push($filteredContacts,$contact);
-            }
-
-            if ($contact->entreprise == $search->entreprise) {
-                array_push($filteredContacts,$contact);
-            }
-
-            if ($contact->promotion == $search->promotion) {
-                array_push($filteredContacts,$contact);
-            }
-
+        if($search->stringSearch<>null){
+            $lstContacts=array_filter($lstContacts, function($contact) use ($search){
+                return str_contains(strtoupper($contact->getNom()),strtoupper($search->stringSearch)) || str_contains(strtoupper($contact->getPrenom()),strtoupper($search->stringSearch));
+            });
         }
 
-        return $filteredContacts;
+        if($search->entreprise<>null){
+            $lstContacts=array_filter($lstContacts, function($contact) use ($search){
+                return $contact->getEntreprise() == $search->entreprise;
+            });
+        }
 
-        //return $this->findAll(); 
+        if($search->promotion<>null){
+            $lstContacts=array_filter($lstContacts,  function($contact) use ($search){
+                return $contact->getPromotion() == $search->promotion;
+            });
+        }
+
+        return $lstContacts;
     }
     // /**
     //  * @return Contact[] Returns an array of Contact objects
