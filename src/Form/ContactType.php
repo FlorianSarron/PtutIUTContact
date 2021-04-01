@@ -3,12 +3,15 @@
 namespace App\Form;
 
 use App\Entity\Contact;
+use App\Entity\Entreprise;
+use App\Entity\Promotion;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ContactType extends AbstractType
 {
@@ -47,13 +50,15 @@ class ContactType extends AbstractType
                 'required'   => true,
                 'attr' => ['placeholder' => 'Fonction du contact','title'=>'Entrez le fonction','autocomplete'=>'given-name']
             ])
-            ->add('entreprise', TextType::class,[
+            ->add('entreprise', EntityType::class,[
                 'required'   => false,
-                'attr' => ['placeholder' => 'Entreprise du contact','title'=>'Entrez l\'entreprise','autocomplete'=>'given-name']
+                'attr' => ['placeholder' => 'Entreprise du contact','title'=>'Entrez l\'entreprise','autocomplete'=>'given-name'],
+                'class' => Entreprise::class
             ])
-            ->add('promotion', TextType::class,[
+            ->add('promotion', EntityType::class,[
                 'required'   => false,
-                'attr' => ['placeholder' => 'Promotion du contact','title'=>'Entrez la promotion','autocomplete'=>'given-name']
+                'attr' => ['placeholder' => 'Promotion du contact','title'=>'Entrez la promotion','autocomplete'=>'given-name'],
+                'class' => Promotion::class
             ])
         ;
     }

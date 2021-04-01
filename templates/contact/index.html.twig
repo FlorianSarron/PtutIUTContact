@@ -3,61 +3,44 @@
 {% block title %}Liste des contacts{% endblock %}
 
 {% block body %}
-    <h1 class="display-4 mt-5 mb-5" style="text-align: center;">Liste des Contacts</h1>
-    <h4 style="font-weight: bold;">Filtres</h4>
+<!--
+<div class="row bg-secondary">
+        <h3 class="col-md-3">Liste des Contacts</h3>
+        <h4 class="col-md-3 offset-md-6" style="font-weight: bold;">Filtres</h4>
+    </div> 
+-->
     <div>
         {% include 'contact/_filter.html.twig' with {form: form } only %}
     </div>
-    <table class="table">
-        <caption>Liste des contacts de la base de données</caption>
-        <thead>
-            <tr>
-                <th scope="col">Nom</th>
-                <th scope="col">Prenom</th>
-                <th scope="col">Adresse</th>
-                <th scope="col">Ville</th>
-                <th scope="col">Code Postal</th>
-                <th scope="col">Telephone</th>
-                <th scope="col">Email</th>
-                <th scope="col">Fonction</th>
-                <th scope="col">Entreprise</th>
-                <th scope="col">Promotion</th>
-                <th scope="col">Editer</th>
-                <th scope="col">Supprimer</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="row">
         {% for contact in contacts %}
-            <tr>
-                <td>{{ contact.nom }}</td>
-                <td>{{ contact.prenom }}</td>
-                <td>{{ contact.adresse }}</td>
-                <td>{{ contact.ville }} </td>
-                <td>{{ contact.codePostal }} </td>
-                <td>{{ contact.telephone }} </td>
-                <td>{{ contact.email }} </td>
-                <td>{{ contact.fonction }} </td>
-                <td>{{ contact.entreprise }} </td>
-                <td>{{ contact.promotion }} </td>
-                <td>
-                    <a class="btn btn-btn btn-success btn-md"  href="{{ path('contact_edit', {'id': contact.id}) }}">
-                        <i class="fas fa-edit">Editer</i>
-                    </a>               
-                </td>
-                <td>
-                    <a class="btn btn-danger btn-md"  href="{{ path('contact_delete', {'id': contact.id}) }}">
-                        <i class="far fa-trash-alt">Supprimer</i>
-                   </a>
-                </td>
-    
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="2">Pas de contacts trouvés</td>
-            </tr>
+        <div class="card mb-3 col-md-3 ml-4" style="text-align: center;">
+            <h3 class="card-header"  style="text-align: center;"> {{ contact.prenom }} {{ contact.nom }}</h3>
+            <div class="card-body">
+              <h5 class="card-title">{{ contact.adresse }}</h5>
+              <h6 class="card-subtitle text-muted">{{ contact.codePostal }} {{ contact.ville }}</h6>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <span class="badge badge-primary"> {{ contact.fonction }}</span>
+                    {% if contact.promotion %}
+                        <span class="badge badge-primary"> Promo : {{ contact.promotion }}</span>
+                    {% endif %}
+                    {% if contact.entreprise %}
+                        <span class="badge badge-primary"> {{ contact.entreprise }} </span>
+                    {% endif %}
+                </li> 
+                <li class="list-group-item"> {{ contact.email }} </li>
+                <li class="list-group-item"> {{ contact.telephone }} </li>
+            </ul>
+            <div class="card-body">
+              <a class="btn btn-btn btn-success btn-md"  href="{{ path('contact_edit', {'id': contact.id}) }}"><i class="fas fa-edit">Editer</i></a>
+              <a class="btn btn-danger btn-md"  href="{{ path('contact_delete', {'id': contact.id}) }}"><i class="far fa-trash-alt">Supprimer</i></a>
+            </div>
+          </div>
         {% endfor %}
-        </tbody>
-    </table>
+        </div>
+    
     <div>
         <a id="btnNouveau" href="{{ path('contact_new') }}"> + Créer un nouveau contact</a> 
     </div>
