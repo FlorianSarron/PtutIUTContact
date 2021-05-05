@@ -21,31 +21,54 @@
             <div class="card-body">
               <h5 class="card-title">{{ contact.adresse }}</h5>
               <h6 class="card-subtitle text-muted">{{ contact.codePostal }} {{ contact.ville }}</h6>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                {% include 'contact/_filter.html.twig' with {form: form } only %}
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    <span class="badge badge-primary"> {{ contact.fonction }}</span>
-                    {% if contact.promotion %}
-                        <span class="badge badge-primary"> Promo : {{ contact.promotion }}</span>
-                    {% endif %}
-                    {% if contact.entreprise %}
-                        <span class="badge badge-primary"> {{ contact.entreprise }} </span>
-                    {% endif %}
-                </li> 
-                <li class="list-group-item"> {{ contact.email }} </li>
-                <li class="list-group-item"> {{ contact.telephone }} </li>
-            </ul>
-            <div class="card-body" style="display: flex; align-items: center; justify-content: center;">
-              <a class="btn btn-btn btn-success btn-md mr-2"  href="{{ path('contact_edit', {'id': contact.id}) }}"><i class="fas fa-edit">Editer</i></a>
-              <a class="btn btn-danger btn-md"  href="{{ path('contact_delete', {'id': contact.id}) }}"><i class="far fa-trash-alt">Supprimer</i></a>
+            <div class="col-md-9">
+                <div class="mb-4">
+                    <a class="btn btn-primary" href="{{ path('contact_new') }}"> Créer un nouveau contact</a>
+                </div>
+                {% if contacts %}
+                <div class="grid">
+                    {% for contact in contacts %}
+                    <div class="card">
+                        <h3 class="card-header"  style="text-align: center;"> {{ contact.prenom }} {{ contact.nom }}</h3>
+                        <div class="card-body">
+                        <h5 class="card-title">{{ contact.adresse }}</h5>
+                        <h6 class="card-subtitle text-muted">{{ contact.codePostal }} {{ contact.ville }}</h6>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <span class="badge badge-primary"> {{ contact.fonction }}</span>
+                                {% if contact.promotion %}
+                                    <span class="badge badge-primary">{{ contact.promotion }}</span>
+                                {% endif %}
+                                {% if contact.entreprise %}
+                                    <a href="{{ path('entreprise_show', {'id': contact.entreprise.id}) }}" class="badge badge-primary"> {{ contact.entreprise }} </a>
+                                {% endif %}
+                            </li> 
+                            <li class="list-group-item"> {{ contact.email }} </li>
+                            <li class="list-group-item"> {{ contact.telephone }} </li>
+                        </ul>
+                        <div class="card-body" style="display: flex; align-items: center; justify-content: center;">
+                        <a class="btn btn-btn btn-success btn-md mr-2"  href="{{ path('contact_edit', {'id': contact.id}) }}"><i class="fas fa-edit">Editer</i></a>
+                        <a class="btn btn-danger btn-md"  href="{{ path('contact_delete', {'id': contact.id}) }}"><i class="far fa-trash-alt">Supprimer</i></a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                    <h4> Aucun contact...</h4>
+                {% endif  %}
             </div>
-          </div>
-        {% endfor %}
         </div>
-    
-    <div>
-        <a id="btnNouveau" href="{{ path('contact_new') }}"> + Créer un nouveau contact</a> 
+
     </div>
+    
+    
+    
 
     <style>
         caption {
@@ -58,8 +81,21 @@
         }
 
         #btnNouveau{
-            color: #ff0000;
-            font-size: 20px;
+            color: #000;
+            border-radius: 5px;
+            background-color: orangered;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px;
+        }
+
+        .badge {
+            color: #000;
         }
      
     </style>

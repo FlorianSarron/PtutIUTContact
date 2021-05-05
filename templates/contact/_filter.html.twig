@@ -1,7 +1,11 @@
-{{ form_start(form) }}
+{{ form_start(form, {attr: {class: 'filter'}}) }}
     {{ form_row(form.stringSearch) }}
+
+    <h4>Entreprises</h4>
     {{ form_row(form.entreprise) }}
+
+    <h4>Promotions</h4>
     {{ form_row(form.promotion) }}
 
-    <button type="submit" class="btn btn-primary">Filtrer </button>
+    <button type="submit" class="btn btn-primary w-100"> Filtrer </button>
 {{ form_end(form) }}

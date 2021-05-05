@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Entreprise;
+use App\Entity\Contact;
 use App\Form\EntrepriseType;
 use App\Repository\EntrepriseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -53,8 +54,17 @@ class EntrepriseController extends AbstractController
      */
     public function show(Entreprise $entreprise): Response
     {
+        $idFind = $entreprise->getId();
+
+        $repo = $this->getDoctrine()->getRepository(Contact::class);
+
+        $contacts = $repo->findBy(
+            ['entreprise' => $idFind]
+        );
+
         return $this->render('entreprise/show.html.twig', [
             'entreprise' => $entreprise,
+            'contacts' => $contacts
         ]);
     }
 

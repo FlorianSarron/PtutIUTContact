@@ -18,7 +18,7 @@ class SearchForm extends AbstractType
     {
         $builder
             ->add('stringSearch',TextType::class,[
-                'label'=>'Rechercher',
+                'label'=> false,
                 'required'=>false,
                 'attr'=>[
                     'placeholder'=>'Rechercher',
@@ -27,14 +27,16 @@ class SearchForm extends AbstractType
                 ]
             ])
             ->add('entreprise',EntityType::class,[
-                'label'=>'Entreprise',
-                'required'=>false,
+                'label'=> false ,
+                'required'=> false,
                 'class'=>Entreprise::class,
+                'expanded' => true,
             ])
             ->add('promotion',EntityType::class,[
-                'label'=>'Promotion',
+                'label'=> false,
                 'required'=>false,
                 'class'=>Promotion::class,
+                'expanded' => true,
             ])
         ;
     }
