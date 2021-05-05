@@ -8,6 +8,8 @@ use App\Form\ContactType;
 use App\Form\SearchForm;
 use App\Repository\ContactRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,6 +31,28 @@ class ContactController extends AbstractController
             'contacts' => $contactRepository->findSearch($data),
             'form'=>$form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/export")
+     * @ParamConverter("contact")
+     */
+    public function export(Request $request): Response
+    {
+        $myVariableCSV = "Nom; Prenom; email;\n";
+        if(!empty($request->request->get('contacts'))){
+            foreach($request->request->get('contacts') as $contact){
+                $myVariableCSV .= $contact->getNom() .";". $contact->getPrenom() .";". $contact->getEmail() .";\n";
+            }
+        }
+        return new Response(
+               $myVariableCSV,
+               200,
+               [
+                 'Content-Type' => 'application/vnd.ms-excel',
+                 "Content-disposition" => "attachment; filename=export.csv"
+              ]
+        );
     }
 
     /**

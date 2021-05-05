@@ -11,6 +11,8 @@
 -->
     <div>
         {% include 'contact/_filter.html.twig' with {form: form } only %}
+        <a class="btn btn-primary btn-md"  href="export">Export</a>
+
     </div>
     <div class="row">
         {% for contact in contacts %}
