@@ -3,51 +3,62 @@
 {% block title %}Entreprise{% endblock %}
 
 {% block body %}
-    <h1>Entreprise</h1>
+    <div class="container">
+        
+        <div class="row">
+            <div class="card col-md-3">
+            <h3 class="card-header"  style="text-align: center;"> {{ entreprise.nom }}</h3>
+            <div class="card-body">
+            <h5 class="card-title">{{ entreprise.adresse }}</h5>
+            <h6 class="card-subtitle text-muted">{{ entreprise.codePostal }} {{ entreprise.ville }}</h6>
+            </div>
+            <ul class="list-group list-group-flush">
+                {% if entreprise.typeEntreprise == 0 %}
+                    <li class="list-group-item"> <span class="badge badge-primary">Stage</span> </li> 
+                {% endif %}
+                {% if entreprise.typeEntreprise == 1 %}
+                    <li class="list-group-item"> <span class="badge badge-primary">Alternance</span> </li>
+                {% endif %}
+                {% if entreprise.typeEntreprise == 2 %}
+                    <li class="list-group-item"> <span class="badge badge-primary">Stage / Alternance </span> </li>
+                {% endif %}
+            <li class="list-group-item"> {{ entreprise.email }} </li>
+            <li class="list-group-item"> {{ entreprise.telephone }} </li>
+            </ul>
+            <div class="card-body">
+            <a class="btn btn-btn btn-success btn-sm"  href="{{ path('entreprise_edit', {'id': entreprise.id}) }}"><i class="fas fa-edit">Editer</i></a>
+            <a class="btn btn-danger btn-sm"  href="{{ path('entreprise_delete', {'id': entreprise.id}) }}"><i class="far fa-trash-alt">Supprimer</i></a>
+            </div>
+            </div>
+            <div class="col-md-9">
+                <table class="table table-secondary">
+                    <thead>
+                      <tr>
+                        <th scope="col">Prénom Nom</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Tél</th>
+                        <th scope="col">Ville</th>
+                        <th scope="col">Promo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for contact in contacts %}
+                        <tr>
+                            <td> {{ contact.prenom }} {{ contact.nom }}</td>
+                            <td>{{ contact.email }}</td>
+                            <td>{{ contact.telephone }}</td>
+                            <td>{{ contact.ville }}</td>
+                            <td>{{ contact.promotion }}</td>
 
-    <table class="table">
-        <caption>Affichage d'une entreprise</caption>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entreprise.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ entreprise.nom }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ entreprise.adresse }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ entreprise.ville }}</td>
-            </tr>
-            <tr>
-                <th>CodePostal</th>
-                <td>{{ entreprise.codePostal }}</td>
-            </tr>
-            <tr>
-                <th>Telephone</th>
-                <td>{{ entreprise.telephone }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ entreprise.email }}</td>
-            </tr>
-            <tr>
-                <th>TypeEntreprise</th>
-                <td>{{ entreprise.typeEntreprise }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('entreprise_index') }}">back to list</a>
-
-    <a href="{{ path('entreprise_edit', {'id': entreprise.id}) }}">edit</a>
-
-    {{ include('entreprise/_delete_form.html.twig') }}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    
 
     <style>
         caption {
