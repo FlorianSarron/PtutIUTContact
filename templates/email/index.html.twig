@@ -4,35 +4,42 @@
 
 {% block body %}
     <h1 class="display-4 mt-5 mb-5" style="text-align: center;">Liste des emails</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Nom</th>
-                <th scope="col">Prenom</th>
-                <th scope="col">Fonction</th>
-                <th scope="col">Entreprise</th>
-                <th scope="col">Promotion</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for contact in contacts %}
-            <tr>
-                <td>{{ contact.nom }}</td>
-                <td>{{ contact.prenom }}</td>
-                <td>{{ contact.fonction }} </td>
-                <td>{{ contact.entreprise }} </td>
-                <td>{{ contact.promotion }} </td>
-                <td>
-                    <a href="sendEmail?to={{contact.email}}"> Envoyer un email</a> 
-                </td>
     
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="2">Pas de contacts trouvés</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <form method="post" action="sendEmail">
+        <a href="sendEmail?to="> Envoyer un email</a> 
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">envoyer</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prenom</th>
+                    <th scope="col">Fonction</th>
+                    <th scope="col">Entreprise</th>
+                    <th scope="col">Promotion</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for contact in contacts %}
+                <tr>
+                    <td><input type="checkbox" name="emails[]" value="{{ contact.email }}"></td>
+                    <td>{{ contact.nom }}</td>
+                    <td>{{ contact.prenom }}</td>
+                    <td>{{ contact.fonction }} </td>
+                    <td>{{ contact.entreprise }} </td>
+                    <td>{{ contact.promotion }} </td>
+                    <td>
+                        <a href="sendEmail?to={{contact.email}}"> Envoyer un email</a> 
+                    </td>
+        
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2">Pas de contacts trouvés</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <button class="btn btn-primary mt-3">{{ button_label|default('Envoyer un mail') }}</button>
+    </form>         
 {% endblock %}

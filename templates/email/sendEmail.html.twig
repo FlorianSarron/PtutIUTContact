@@ -5,6 +5,11 @@
     <div id="contactForm">  
         <form method="post">
             <div>
+                <p >email envoyé à :
+                {% for email in emails %}
+                     <input type="hidden" name="emails[]" value="{{email}}">{{email}}</input>
+                {% endfor %}
+                </p>
                 <label for="msg">Message :</label>
                 <textarea id="msg" name="message"></textarea>
             </div>
