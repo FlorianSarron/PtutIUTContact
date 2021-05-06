@@ -13,6 +13,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * @Route("/contact")
@@ -24,9 +25,14 @@ class ContactController extends AbstractController
      */
     public function index(ContactRepository $contactRepository,Request $request): Response
     {
+        $session = new Session();
+        $session->start();
         $data=new SearchData();
         $form=$this->createForm(SearchForm::class, $data);
         $form->handleRequest($request);
+        $contacts = $contactRepository->findSearch($data);
+        $session = $this->get('session');
+        $session->set('contacts', $contacts);
         return $this->render('contact/index.html.twig', [
             'contacts' => $contactRepository->findSearch($data),
             'form'=>$form->createView()
@@ -35,22 +41,29 @@ class ContactController extends AbstractController
 
     /**
      * @Route("/export")
-     * @ParamConverter("contact")
      */
-    public function export(Request $request): Response
+    public function export(ContactRepository $contactRepository): Response
     {
-        $myVariableCSV = "Nom; Prenom; email;\n";
-        if(!empty($request->request->get('contacts'))){
-            foreach($request->request->get('contacts') as $contact){
-                $myVariableCSV .= $contact->getNom() .";". $contact->getPrenom() .";". $contact->getEmail() .";\n";
+        $session = new Session();
+        $session->start();
+        $FileCSV = "Nom; Prenom; email;\n";
+        if(empty($session->get('contacts'))){
+            $session->set('contacts', $contactRepository->findall()); 
+            foreach($session->get('contacts') as $contact){
+                $FileCSV .= $contact->getNom() .";". $contact->getPrenom() .";". $contact->getEmail() .";\n";
+            }
+        }
+        else{
+            foreach($session->get('contacts') as $contact){
+                $FileCSV .= $contact->getNom() .";". $contact->getPrenom() .";". $contact->getEmail() .";\n";
             }
         }
         return new Response(
-               $myVariableCSV,
+               $FileCSV,
                200,
                [
                  'Content-Type' => 'application/vnd.ms-excel',
-                 "Content-disposition" => "attachment; filename=export.csv"
+                 "Content-disposition" => "attachment; filename=export123.csv"
               ]
         );
     }
