@@ -46,16 +46,16 @@ class ContactController extends AbstractController
     {
         $session = new Session();
         $session->start();
-        $FileCSV = "Nom; Prenom; email;\n";
+        $FileCSV = " Nom; Prenom; Email; Ville; Code postal; Telephone; Fonction; Entreprise; Promotion;\n";
         if(empty($session->get('contacts'))){
             $session->set('contacts', $contactRepository->findall()); 
             foreach($session->get('contacts') as $contact){
-                $FileCSV .= $contact->getNom() .";". $contact->getPrenom() .";". $contact->getEmail() .";\n";
+                $FileCSV .= $contact->getNom() .";". $contact->getPrenom() .";". $contact->getEmail() .";" . $contact->getAdresse().";" . $contact->getVille() .";". $contact->getCodePostal() . ";". $contact->getTelephone() .";". $contact->getFonction() .";". $contact->getEntreprise() .";". $contact->getPromotion() .";\n";
             }
         }
         else{
             foreach($session->get('contacts') as $contact){
-                $FileCSV .= $contact->getNom() .";". $contact->getPrenom() .";". $contact->getEmail() .";\n";
+                $FileCSV .= $contact->getNom() .";". $contact->getPrenom() .";". $contact->getEmail() .";" . $contact->getAdresse().";" . $contact->getVille() .";". $contact->getCodePostal() . ";". $contact->getTelephone() .";". $contact->getFonction() .";". $contact->getEntreprise() .";". $contact->getPromotion() .";\n";
             }
         }
         return new Response(
@@ -63,7 +63,7 @@ class ContactController extends AbstractController
                200,
                [
                  'Content-Type' => 'application/vnd.ms-excel',
-                 "Content-disposition" => "attachment; filename=export123.csv"
+                 "Content-disposition" => "attachment; filename=export_contact.csv"
               ]
         );
     }
