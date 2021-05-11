@@ -60,6 +60,23 @@ class ContactController extends AbstractController
         
         $contacts = $contactRepository->findBy(['email' => $contactsMail]);
 
+
+
+        if(!empty($request->request->get('emails'))){
+            foreach($request->request->get('emails') as $email_to){
+                if(!empty($request->request->get('message'))){
+                    dd($request);
+                    $email = (new Email())
+                    ->from('contact@univ-lyon1.fr')
+                    ->to($email_to)
+                    ->subject('Service client')
+                    ->text($request->request->get('message'));
+                    //$this->mailer->send($email);
+                    dump('réussi');
+                }
+            }
+        }
+
         return $this->render('contact/sendMail.html.twig', [
             'contactsMail' => $contactsMail,
             'contacts' => $contacts

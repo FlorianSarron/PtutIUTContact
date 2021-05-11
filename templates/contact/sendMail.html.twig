@@ -4,18 +4,26 @@
 {% block body %}
     <div id="contactForm">  
         <form method="post">
-            <div>
-                <p >email envoyé à :
-                
-                </p>
-                <label for="msg">Message :</label>
-                <textarea id="msg" name="message"></textarea>
+            <div class="mb-3">
+                <p> Destinataire(s) : </p>
+                {% for contact in contacts %}
+                <span class="badge bg-primary"> {{ contact.prenom }} {{ contact.nom }}</span>
+                {% endfor %}
+            </div>
+            <div class="form-group mb-3">
+                <input type="text" class="form-control" placeholder="Objet du message" name="objet" id="inputObjet">
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" id="msg" name="message" placeholder="Contenu du message" rows="3"></textarea>
             </div>
             <button class="btn btn-primary mt-3">{{ button_label|default('Envoyer') }}</button>
         </form>
+    </div>
 
-    </div>
-    <div>
-        <a href="email"> retour a la liste d'email</a> 
-    </div>
+    <style>
+        p {
+            margin: 0;
+        }
+    </style>
 {% endblock %}
+

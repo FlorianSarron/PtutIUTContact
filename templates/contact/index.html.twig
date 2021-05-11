@@ -10,8 +10,9 @@
             </div>
             <div class="col-md-9">
                 <div class="row mb-4">
-                    <a class="btn btn-primary" href="{{ path('contact_new') }}"> Créer un nouveau contact</a>
                     <a class="btn btn-primary ml-2" href="{{ path('contact_sendMail', {'mails': contactsMail}) }}"> Envoyer un mail à {{ nbContacts }} personne(s) </a>
+                    <a class="btn btn-primary ml-2" href="{{ path('contact_new') }}"> Créer un nouveau contact</a>
+                    <a class="btn btn-primary ml-2" href="{{ path('entreprise_new') }}"> Créer une nouvelle entreprise</a>
                 </div>
                 {% if contacts %}
                 <div class="grid">
@@ -35,7 +36,7 @@
                             <li class="list-group-item"> {{ contact.email }} </li>
                             <li class="list-group-item"> {{ contact.telephone }} </li>
                             <li class="list-group-item">
-                                <a href="{{ path('contact_sendMail', {'mails': contact.email}) }}" class="badge badge-primary"> {{ contact.entreprise }} </a>
+                                <a class="btn btn-btn btn-info btn-md w-100" href="{{ path('contact_sendMail', {'mails': contact.email}) }}" class="badge badge-primary"> Contacter </a>
                             </li>
 
                         </ul>
