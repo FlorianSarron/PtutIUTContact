@@ -64,6 +64,10 @@ class ContactController extends AbstractController
             'contactsMail' => $contactsMail,
             'contacts' => $contacts
         ]);
+
+    }
+    
+    /**
      * @Route("/export")
      */
     public function export(ContactRepository $contactRepository): Response
