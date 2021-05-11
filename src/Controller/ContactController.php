@@ -8,9 +8,12 @@ use App\Form\ContactType;
 use App\Form\SearchForm;
 use App\Repository\ContactRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * @Route("/contact")
@@ -22,6 +25,8 @@ class ContactController extends AbstractController
      */
     public function index(ContactRepository $contactRepository,Request $request): Response
     {
+        $session = new Session();
+        $session->start();
         $data=new SearchData();
         $form=$this->createForm(SearchForm::class, $data);
         $form->handleRequest($request);
@@ -36,6 +41,8 @@ class ContactController extends AbstractController
         $request->query->set('mails', $contactsMail);
 
 
+        $session = $this->get('session');
+        $session->set('contacts', $contacts);
         return $this->render('contact/index.html.twig', [
             'contacts' => $contacts,
             'nbContacts' => count($contacts),
@@ -57,6 +64,72 @@ class ContactController extends AbstractController
             'contactsMail' => $contactsMail,
             'contacts' => $contacts
         ]);
+     * @Route("/export")
+     */
+    public function export(ContactRepository $contactRepository): Response
+    {
+        $session = new Session();
+        $session->start();
+        $FileCSV = "Nom; Prenom; email;\n";
+        if(empty($session->get('contacts'))){
+            $session->set('contacts', $contactRepository->findall()); 
+            foreach($session->get('contacts') as $contact){
+                $FileCSV .= $contact->getNom() .";". $contact->getPrenom() .";". $contact->getEmail() .";\n";
+            }
+        }
+        else{
+            foreach($session->get('contacts') as $contact){
+                $FileCSV .= $contact->getNom() .";". $contact->getPrenom() .";". $contact->getEmail() .";\n";
+            }
+        }
+        return new Response(
+               $FileCSV,
+               200,
+               [
+                 'Content-Type' => 'application/vnd.ms-excel',
+                 "Content-disposition" => "attachment; filename=export123.csv"
+              ]
+        );
+    }
+
+    /**
+     * @Route("/import")
+     */
+    public function import(Request $request): Response
+    {
+        $upload     = new UploadData();
+        $formUpload = $this->createForm(UploadType::class, $upload);
+        $formUpload->handleRequest($request);
+        if ($formUpload->isSubmitted() && $formUpload->isValid()) {
+
+            $file     = $upload->getUpload();
+            $fileName = $request->get('file');
+            $file->move($this->getParameter('upload_directory'), $fileName);
+            $upload->setUpload($fileName);
+
+            $reader = Reader::createFromPath(__DIR__.'/'.$fileName);
+            $result = $reader->fetchAssoc();
+            foreach ($result as $row){
+                $contact = new Contact();
+                $contact
+                    ->setNom($row['civility'])
+                    ->setPrenom($row['last_name'])
+                    ->setAdresse($row['first_name'])
+                    ->setVille($row['email'])
+                    ->setCodePostal($row['number'])
+                    ->setTelephone($row['dealer'])
+                    ->setEmail($row['dealer_zone'])
+                    ->setFonction($row['dealer_code'])
+                    ->setEntreprise($row['dealer_code'])
+                    ->setPromotion($row['dealer_code'])
+                ;
+                $this->em->persist($cont);
+
+            }
+            $this->em->flush();
+            $this->addFlash('success','Bien ajouté avec succès');
+        }
+        return $this->redirectToRoute('contact_index');
     }
 
     /**
