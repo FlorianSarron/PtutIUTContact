@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Notification\MailNotification;
 
+/**
+* @Route("/mail")
+*/
 class EmailController extends AbstractController
 {
     /*private $mailer;
@@ -19,9 +22,10 @@ class EmailController extends AbstractController
     public function __construct(MailerInterface $mailer){
         $this->mailer=$mailer;
     }*/
+
     /**
-    * @Route("/email")
-    */
+     * @Route("/", name="mail_index", methods={"GET"})
+     */
     public function index(ContactRepository $contactRepository)
     {
 
@@ -33,6 +37,7 @@ class EmailController extends AbstractController
     * @Route("/sendEmail")
     */
     public function sendEmail(Request $request){
+        dd($request);
         if(!empty($request->request->get('emails'))){
             foreach($request->request->get('emails') as $email_to){
                 if(!empty($request->request->get('message'))){
