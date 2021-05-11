@@ -9,10 +9,11 @@
                 {% include 'contact/_filter.html.twig' with {form: form } only %}
             </div>
             <div class="col-md-9">
-                <div class="row mb-4">
+                <div id="rowNew" class="row mb-4">
                     <a class="btn btn-primary ml-2" href="{{ path('contact_sendMail', {'mails': contactsMail}) }}"> Envoyer un mail à {{ nbContacts }} personne(s) </a>
                     <a class="btn btn-primary ml-2" href="{{ path('contact_new') }}"> Créer un nouveau contact</a>
                     <a class="btn btn-primary ml-2" href="{{ path('entreprise_new') }}"> Créer une nouvelle entreprise</a>
+                    <a class="btn btn-primary ml-2" href="{{ path('promotion_new') }}"> Créer une nouvelle promotion</a>
                 </div>
                 {% if contacts %}
                 <div class="grid">
@@ -90,6 +91,12 @@
             margin-top: 25%;
             text-align: center;
         }
+
+        #rowNew {
+            flex-wrap: unset;
+        }
+
+        
      
     </style>
 {% endblock %}
