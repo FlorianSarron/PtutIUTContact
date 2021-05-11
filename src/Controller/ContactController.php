@@ -26,7 +26,6 @@ class ContactController extends AbstractController
     public function index(ContactRepository $contactRepository,Request $request): Response
     {
         $session = new Session();
-        $session->start();
         $data=new SearchData();
         $form=$this->createForm(SearchForm::class, $data);
         $form->handleRequest($request);
@@ -73,7 +72,6 @@ class ContactController extends AbstractController
     public function export(ContactRepository $contactRepository): Response
     {
         $session = new Session();
-        $session->start();
         $FileCSV = " Nom; Prenom; Email; Ville; Code postal; Telephone; Fonction; Entreprise; Promotion;\n";
         if(empty($session->get('contacts'))){
             $session->set('contacts', $contactRepository->findall()); 
