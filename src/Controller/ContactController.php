@@ -31,14 +31,42 @@ class ContactController extends AbstractController
         $form=$this->createForm(SearchForm::class, $data);
         $form->handleRequest($request);
         $contacts = $contactRepository->findSearch($data);
+
+        $contactsMail = [];
+        foreach($contacts as $contact) {
+            $mail = $contact->getEmail();
+            array_push($contactsMail, $mail);
+        }
+
+        $request->query->set('mails', $contactsMail);
+
+
         $session = $this->get('session');
         $session->set('contacts', $contacts);
         return $this->render('contact/index.html.twig', [
-            'contacts' => $contactRepository->findSearch($data),
+            'contacts' => $contacts,
+            'nbContacts' => count($contacts),
+            'contactsMail' => $contactsMail,
             'form'=>$form->createView()
         ]);
     }
 
+    /**
+     * @Route("/sendMail", name="contact_sendMail", methods={"GET","POST"})
+     */
+    public function sendMail(Request $request, ContactRepository $contactRepository): Response
+    {
+        $contactsMail = $request->query->get('mails');
+        
+        $contacts = $contactRepository->findBy(['email' => $contactsMail]);
+
+        return $this->render('contact/sendMail.html.twig', [
+            'contactsMail' => $contactsMail,
+            'contacts' => $contacts
+        ]);
+
+    }
+    
     /**
      * @Route("/export")
      */
